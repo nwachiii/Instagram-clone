@@ -5,7 +5,6 @@
 
 .app {
   background-color: #fafafa;
-  height: 100vh;
 }
 
 .app__header {
@@ -13,4 +12,5 @@
   padding: 20px;
   border-bottom: 1px solid lightgray;
   object-fit: contain;
+  margin-bottom: 35px;
 }
