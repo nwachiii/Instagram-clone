@@ -14,3 +14,8 @@
   object-fit: contain;
   margin-bottom: 35px;
 }
+
+.app__signup {
+  display: flex;
+  flex-direction: column;
+}
