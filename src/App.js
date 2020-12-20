@@ -162,7 +162,7 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" onClick={signUp}>
+            <Button type="submit" onClick={signIn}>
               Sign In
             </Button>
           </form>
