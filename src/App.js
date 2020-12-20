@@ -33,6 +33,7 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -40,12 +41,10 @@ function App() {
   //auth
   const [user, setUser] = useState(null);
 
-
-
   //UseEffect -> runs a piece of code based on a specific condition
   //auth
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         //user has logged in...
         setUser(authUser);
@@ -58,21 +57,19 @@ function App() {
             displayName: username,
           });
         }
-
       } else {
         //user has logged out
         setUser(null);
       }
-    })
+    });
 
     return () => {
       //perform cleanup action before 'user', and 'username' values change
       unsubscribe();
- }
+    };
   }, [user, username]);
-  
-  //onSnapshot -> listens and fires for anytime a document(post) is added, removed, or gets modified
 
+  //onSnapshot -> listens and fires for anytime a document(post) is added, removed, or gets modified
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) => {
       //everytime a new post is added, this code fires.
@@ -90,7 +87,21 @@ function App() {
 
     auth
       .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        return authUser.user.updateProfile9({
+          displayName: username,
+        });
+      })
       .catch((error) => alert(error.message));
+  };
+
+  const signIn = (event) => {
+    event.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message));
+
+    setOpenSignIn(false);
   };
 
   return (
@@ -113,7 +124,7 @@ function App() {
             />
             <Input
               placeholder="email"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -129,6 +140,34 @@ function App() {
           </form>
         </div>
       </Modal>
+      <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
+        <div style={modalStyle} className={classes.paper}>
+          <form className="app__signup">
+            <center>
+              <img
+                className="app__headerImage"
+                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                alt=""
+              />
+            </center>
+            <Input
+              placeholder="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button type="submit" onClick={signUp}>
+              Sign In
+            </Button>
+          </form>
+        </div>
+      </Modal>
 
       <div className="app__header">
         <img
@@ -136,7 +175,14 @@ function App() {
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
-        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ) : (
+          <div className="app__loginContainer">
+            <Button onClick={() => setOpen(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
       </div>
 
       {posts.map(({ id, post }) => {
