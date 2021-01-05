@@ -74,6 +74,9 @@ function App() {
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) => {
       //everytime a new post is added, this code fires.
+      // Timestamp sorts the posts by the time of upload,
+      // .orderBy("timestamp", "desc")
+      // i.e more recent posts are stacked on top
       setPosts(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -107,7 +110,11 @@ function App() {
 
   return (
     <div className="app">
-      <ImageUpload />
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry! you need to login to upload a post</h3>
+      )}
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
