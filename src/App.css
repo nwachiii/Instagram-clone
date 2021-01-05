@@ -8,11 +8,17 @@
 }
 
 .app__header {
+  display: flex;
+  justify-content: space-between;
   background-color: white;
   padding: 20px 10px 5px;
   border-bottom: 1px solid lightgray;
   object-fit: contain;
   margin-bottom: 35px;
+}
+
+.app__headerImage {
+  object-fit: contain;
 }
 
 .app__signup {
