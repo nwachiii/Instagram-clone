@@ -110,12 +110,6 @@ function App() {
 
   return (
     <div className="app">
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry! you need to login to upload a post</h3>
-      )}
-
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
@@ -195,16 +189,27 @@ function App() {
         )}
       </div>
 
-      {posts.map(({ id, post }) => {
-        return (
-          <Posts
-            key={id}
-            username={post.username}
-            caption={post.caption}
-            imageUrl={post.imageUrl}
-          />
-        );
-      })}
+      <div className="app__posts">
+        {posts.map(({ id, post }) => {
+          return (
+            <Posts
+              key={id}
+              username={post.username}
+              caption={post.caption}
+              imageUrl={post.imageUrl}
+            />
+          );
+        })}
+      </div>
+      <div className="image__upload">
+        {user?.displayName ? (
+          <ImageUpload username={user.displayName} />
+        ) : (
+          <h3 className="image__h3">
+            Want to upload a post? You need to login first
+          </h3>
+        )}{" "}
+      </div>
     </div>
   );
 }

@@ -14,7 +14,6 @@
   padding: 20px 10px 5px;
   border-bottom: 1px solid lightgray;
   object-fit: contain;
-  margin-bottom: 35px;
 }
 
 .app__headerImage {
@@ -24,4 +23,23 @@
 .app__signup {
   display: flex;
   flex-direction: column;
+}
+
+.app__posts {
+  padding: 20px;
+}
+
+.image__uploadSection {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 30px;
+  bottom: 0;
+}
+
+.image__h3 {
+  width: 60%;
+  background-color: white;
+  margin: 10px 20px;
+  padding: 10px 15px;
 }
