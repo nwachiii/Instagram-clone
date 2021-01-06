@@ -56,7 +56,7 @@ function ImageUpload(username) {
   };
 
   return (
-    <div className="image-upload">
+    <div className="image__upload">
       <progress className="image-upload__progress" value={progress} max="100" />
       <input
         type="text"

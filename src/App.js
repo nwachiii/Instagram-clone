@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Posts from "./Posts";
-import "./App.css";
-import { db, auth } from "./firebase";
+import { Button, Input } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { Button, Input } from "@material-ui/core";
+import InstagramEmbed from "react-instagram-embed";
+
+import { db, auth } from "./firebase";
+import Posts from "./Posts";
+import "./App.css";
 import ImageUpload from "./ImageUpload";
 
 function getModalStyle() {
@@ -190,18 +192,35 @@ function App() {
       </div>
 
       <div className="app__posts">
-        {posts.map(({ id, post }) => {
-          return (
-            <Posts
-              key={id}
-              username={post.username}
-              caption={post.caption}
-              imageUrl={post.imageUrl}
-            />
-          );
-        })}
+        <div className="app__postLeft">
+          {posts.map(({ id, post }) => {
+            return (
+              <Posts
+                key={id}
+                username={post.username}
+                caption={post.caption}
+                imageUrl={post.imageUrl}
+              />
+            );
+          })}
+        </div>
+        <div className="app__postRight">
+          <h3>Hey Hey!</h3>
+          <InstagramEmbed
+            url="https://www.instagram.com/p/CJsj8IAAwnG/"
+            maxWidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {}}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
+          />
+        </div>
       </div>
-      <div className="image__upload">
+      <div>
         {user?.displayName ? (
           <ImageUpload username={user.displayName} />
         ) : (
