@@ -1,0 +1,32 @@
+.post__commentBox {
+  display: flex;
+  margin-top: 5px;
+}
+
+.comment__text,
+.comment__text:focus {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+  outline: none;
+}
+
+.comment__btn,
+.comment__btn:focus {
+  flex: 0.1;
+  border: none;
+  border-top: 1px solid lightgray;
+  background-color: transparent;
+  color: #6082a3;
+  outline: none;
+}
+
+.comment__btn:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+.post__comments {
+  padding: 15px;
+}
