@@ -190,17 +190,22 @@ function App() {
       </div>
 
       <div className="app__posts">
-        {posts.map(({ id, post }) => {
-          return (
-            <Posts
-              key={id}
-              user={user}
-              username={post.username}
-              caption={post.caption}
-              imageUrl={post.imageUrl}
-            />
-          );
-        })}
+        <div className="app__postsLeft">
+          {posts.map(({ id, post }) => {
+            return (
+              <Posts
+                key={id}
+                user={user}
+                username={post.username}
+                caption={post.caption}
+                imageUrl={post.imageUrl}
+              />
+            );
+          })}
+        </div>
+        <div className="app__postsRight">
+          {/* InstagramEmbed comes in here */}
+        </div>
       </div>
       <div className="image__upload">
         {user?.displayName ? (

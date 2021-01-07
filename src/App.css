@@ -9,7 +9,7 @@
 
 .app__header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: white;
   padding: 20px 10px 5px;
   border-bottom: 1px solid lightgray;
@@ -30,11 +30,14 @@
 
 .app__posts {
   padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .image__uploadSection {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   position: fixed;
   height: 30px;
   bottom: 0;
